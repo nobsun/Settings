@@ -14,12 +14,22 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
+
 ;;
 ;; Auto-save-buffers
 ;;
 (require 'auto-save-buffers-enhanced)
 (setq auto-save-buffers-enhanced-interval 0.5)
 (auto-save-buffers-enhanced t)
+
+;;
+;; clmemo
+;;
+(autoload 'clmemo "clmemo" "ChangeLog MEMO mode." t)
+(define-key ctl-x-map "M" 'clmemo)
+(setq clmemo-file-name "~/Dropbox/clmemo/ChangeLog")
+(setq add-log-mailing-address "nobsun@sampou.org")
+(setq add-log-full-name "Nobuo Yamashita")
 
 ;;
 ;; GHC
