@@ -1,0 +1,38 @@
+# Set up aliases
+alias rm='nocorrect rm -i'
+alias mv='nocorrect mv -i'       # no spelling correction on mv
+alias cp='nocorrect cp -i'       # no spelling correction on cp
+alias mkdir='nocorrect mkdir' # no spelling correction on mkdir
+alias j=jobs
+alias pu=pushd
+alias po=popd
+alias d='dirs -v'
+alias h=history
+
+alias emacs='XMODIFIERS=@im=none emacs'
+
+alias em='emacsclient --no-wait'
+alias nw='emacs -nw'
+
+alias more='TERM=vt100 lv'
+alias less='TERM=vt100 lv'
+alias jless='TERM=vt100 lv'
+alias ls='ls -F'
+alias ll='ls -lF'
+alias la='ls -AF'
+
+# List only directories and symbolic
+# links that point to directories
+alias lsd='ls -ld *(-/DN)'
+
+# List only file beginning with "."
+alias lsa='ls -ld .*'
+
+# darcs
+alias whatsnew='darcs whatsnew -l | grep -v "^a"'
+
+# rlwrapper
+alias gosh='rlwrap -b "(){}[],#\";| " gosh'
+
+# remove backup file
+alias rmbk='rm -f **/*~;rm -f **/core'
