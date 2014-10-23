@@ -19,7 +19,8 @@
 ;; Auto-save-buffers
 ;;
 (require 'auto-save-buffers-enhanced)
-(setq auto-save-buffers-enhanced-interval 0.5)
+;;(setq auto-save-buffers-enhanced-interval 1.0) ;; default 0.5
+(setq auto-save-buffers-enhanced-quiet-save-p t)
 (auto-save-buffers-enhanced t)
 
 ;;
@@ -32,22 +33,13 @@
 (setq add-log-full-name "Nobuo Yamashita")
 
 ;;
-;; GHC
+;; url-browser
 ;;
-(autoload 'ghc-init "ghc" nil t)
-(autoload 'ghc-debug "ghc" nil t)
-(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+(setq browse-url-browser-function 'browse-url-generic)
+(setq browse-url-generic-program "/usr/bin/google-chrome")
 
 ;;
-;; Linum
-;;
-(require 'linum)
-(global-linum-mode)
-;;(global-hl-line-mode)
-;;(setq hl-line-face 'underline)
-
-;;
-;; SKK
+;; skk
 ;;
 (global-set-key "\C-x\C-j" 'skk-mode)
 (global-set-key "\C-xj" 'skk-auto-fill-mode)
@@ -67,6 +59,13 @@
 ;(setq skk-kutouten-type 'jp)
 
 ;;
+;; ghc-mod
+;;
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+
+;;
 ;; yatex-mode
 ;;
 (setq auto-mode-alist
@@ -75,6 +74,7 @@
 (setq YaTeX-kanji-code 4)
 (setq tex-command "platex")
 (add-hook 'yatex-mode-hook
+;;	  '(lambda () (auto-fill-mode t) (setq fill-column 70))
 	  '(lambda () (auto-fill-mode 0))
 	  )
 (setq dviprint-command-format "dvipdfmx %s")
@@ -91,10 +91,33 @@
 (add-hook 'yahtml-mode-hook
 	  '(lambda () (auto-fill-mode 0))
 	  )
+;;(setq yahtml-www-browser browse-url-generic-program)
+
+;;
+;; Time stamp
+;;
+(defun my-insert-time ()
+  (interactive)
+  (insert (format-time-string "%H:%M:%S")))
+
+(defun my-insert-date ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d %H:%M:%S %Z")))
+
+(global-set-key "\C-xT" 'my-insert-time)
+
+;;
+;; Linum
+;;
+(require 'linum)
+(global-linum-mode)
+;;(global-hl-line-mode)
+;;(setq hl-line-face 'underline)
 
 ;;
 ;; misc
 ;;
+
 (mouse-wheel-mode t)
 (global-font-lock-mode t)
 (auto-compression-mode t)
@@ -112,3 +135,4 @@
 (setq inhibit-startup-message t)
 
 (global-set-key "\C-z" 'undo)
+;(global-set-key "\C-h" 'backward-delete-char)
